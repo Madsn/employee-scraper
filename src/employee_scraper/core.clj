@@ -1,6 +1,7 @@
 (ns employee-scraper.core)
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(use 'clj-webdriver.taxi)
+
+(set-driver! {:browser :firefox})
+
+(to "INTRANET URL HERE")
