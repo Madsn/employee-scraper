@@ -14,13 +14,25 @@
 (defn get-match-str [srcstr]
   (re-find #"SYSTEMATICGROUP%5C\S+" srcstr))
   
+(defn get-initials-2 [initialstr]
+  (let [initialstr2 (get-match-str initialstr)]
+  (if (> (count initialstr2) 18)
+      (clojure.string/replace 
+	      (subs initialstr2 18)
+	      #"%2D" "-")
+	  "XXXXXXXXXXXX")))
+  
 (defn get-initials [elem]
   (let [srcstr (attribute elem :href)]
-	(subs (get-match-str srcstr) 18)))
+    (if (nil? srcstr)
+	    "XXXXXXXXXXX"
+	    (get-initials-2 srcstr))))
   
 (defn get-name [elem]
   (let [name-elem (attribute elem :title)]
-    (clojure.string/trim name-elem)))
+    (if (nil? name-elem)
+	    "XXXXXXXXXXX"
+        (clojure.string/trim name-elem))))
   
 (defn print-names []
   (doseq [pelem (person-finder)]
@@ -37,6 +49,7 @@
 		(Thread/sleep 4000)
 		(recur))
       ("done"))))
+      "done")))
 	 
 (to "INTRANET URL HERE")
 
