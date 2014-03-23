@@ -26,7 +26,7 @@
   (let [srcstr (attribute elem :href)]
     (if (nil? srcstr)
 	    "XXXXXXXXXXX"
-	    (get-initials-2 srcstr))))
+	    (clojure.string/upper-case (get-initials-2 srcstr)))))
   
 (defn get-name [elem]
   (let [name-elem (attribute elem :title)]
